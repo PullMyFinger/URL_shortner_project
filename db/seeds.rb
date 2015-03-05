@@ -15,4 +15,12 @@ ActiveRecord::Base.transaction do
   User.create(:email => "gsp@appacademy.io")
   User.create(:email => "boss@appacademy.io")
 
+  ShortenedUrl.create_for_user_and_long_url(User.first, 'www.iamcool.com')
+  ShortenedUrl.create_for_user_and_long_url(User.last, 'www.iamnotcool.com')
+
+  Visit.record_visit!(User.first, ShortenedUrl.first)
+  Visit.record_visit!(User.last, ShortenedUrl.first)
+  Visit.record_visit!(User.first, ShortenedUrl.last)
+  Visit.record_visit!(User.find_by_id(2), ShortenedUrl.last)
+  Visit.record_visit!(User.find_by_id(3), ShortenedUrl.first)
 end
