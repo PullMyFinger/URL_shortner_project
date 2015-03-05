@@ -46,4 +46,16 @@ class ShortenedUrl < ActiveRecord::Base
 
     code
   end
+
+  def num_clicks
+    visits.count
+  end
+
+  def num_uniques
+    Visit.select(:shortened_url_id).distinct.count
+  end
+
+  def num_recent_uniques
+    Visit.select(:shortened_url_id).distinct.where(['created_at > ?', 5.seconds.ago])
+  end
 end
