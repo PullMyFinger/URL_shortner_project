@@ -23,4 +23,5 @@ ActiveRecord::Base.transaction do
   Visit.record_visit!(User.first, ShortenedUrl.last)
   Visit.record_visit!(User.find_by_id(2), ShortenedUrl.last)
   Visit.record_visit!(User.find_by_id(3), ShortenedUrl.first)
+  Visit.record_visit!(User.last, ShortenedUrl.first)
 end
